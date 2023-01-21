@@ -1,0 +1,29 @@
+#title-container {
+    background: rgb(51,139,185);
+    background: linear-gradient(90deg, rgba(51,139,185,1) 0%, rgba(27,16,133,1) 100%);
+}
+
+#title {
+    color: #FFFF;   
+}
+
+.wrapper {
+    /* margin-left: none; */
+    padding-left: 15px;
+
+
+}
+
+.search-form {
+    width: 15%;
+    padding-left: 15px;
+}
+
+.search-container {
+    
+}
+
+#submit-btn {
+    margin-top: 15px;
+    width: 15%;
+}
