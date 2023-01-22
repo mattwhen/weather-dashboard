@@ -17,30 +17,31 @@
         </div>
     </header>
     <!--Start of main content-->
-    <div class="left-content">
-        <div id="search-title">
-            <h2 class="text-start">Search for a City</h2>
-        </div>
-        <form class="search-form">
-            <div class="search-container">
-                <label for="search-city" class="form-label"></label>
-                <input type="text" class="form-control" id="search-city" placeholder="Search here...">
+    <main class="container-main">
+        <div class="left-content">
+            <div id="search-title">
+                <h2 class="text-start">Search for a City</h2>
             </div>
-            <div>
-                <button id="submit-btn" type="button" class="btn btn-primary btn-md">Search</button>
-            </div>
-            <!--Border that separates search bar and the appended list of recent searches-->
-            <div class="border"></div>
-            <!--TODO: APPEND RECENTLY SEARCHED CITIES TO THE <ul> ELEMENT-->
-            <ul class="recent-searches"></ul>
-        </form>
-    </div>
-
-    <div class="right-content">
-        <div class="weather-status">
-
+            <form class="search-form">
+                <div class="search-container">
+                    <label for="search-city" class="form-label"></label>
+                    <input type="text" class="form-control" id="search-city" placeholder="Search here...">
+                </div>
+                <div>
+                    <button id="submit-btn" type="button" class="btn btn-primary btn-md">Search</button>
+                </div>
+                <!--Border that separates search bar and the appended list of recent searches-->
+                <div class="border"></div>
+                <!--TODO: APPEND RECENTLY SEARCHED CITIES TO THE <ul> ELEMENT-->
+                <ul class="recent-searches"></ul>
+            </form>
         </div>
-    </div>
+        <div class="center-content">
+            <div class="weather-status">
+                <h2>Current weather status</h2>
+            </div>
+        </div>
+    </main>
     <!--Footer content-->
     <footer>
         <div class="footer">
