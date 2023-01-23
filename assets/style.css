@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     top: 0;
-
     background: rgb(51,139,185);
     background: linear-gradient(90deg, rgba(51,139,185,1) 0%, rgba(27,16,133,1) 100%);
 }
@@ -12,10 +11,10 @@
     color: #FFFF;  
 }
 
+/* Container that uses flexbox to adjust the left and right content accordinly */ 
 .container-main {
     display: flex;
     justify-content: space-around;
-    margin-top: 15px;
 }
 
 .border {
@@ -26,6 +25,10 @@
 
 .search-container {
     width: 400px;
+}
+
+.left-content {
+    margin: 15px;
 }
 
 #submit-btn {
@@ -40,8 +43,11 @@
     border-radius: 10px;
     height: 150px;
     width: 1200px;
+    margin: 15px;
+    margin-right: 100px;
 }
 
+/* Start of Footer content */
 .footer {
     position: fixed;
     left: 0;
@@ -59,9 +65,7 @@
     font-size: 30px;
 }
 
-
-@media (min-width: 320px) and (max-width: 480px) {
-    .search-container {
-        width: 200px;
-    }
-}    
+/* Start of Media Queries */ 
+/* @media (min-width: 320px) and (max-width: 480px) {
+    .main
+}     */
