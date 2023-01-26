@@ -1,3 +1,6 @@
+let centerContent = document.querySelector('.center-content');
+
+
 
 // How do I hide the API key?
 let apiKey = 'fffae12063e8e68b76c3c77004656139';
@@ -34,21 +37,37 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
 
         console.log(data);
         
-       let centerContent = document.querySelector('.center-content');
+        let createh2El = document.querySelector('.weather-status');
+        createh2El.textContent = data.list[0].dt_txt;
+
        let createTemperatureDiv = document.createElement('div');
-       createTemperatureDiv.textContent = 'Temp: ' + data.list[0].main.temp;
+       createTemperatureDiv.textContent = 'Temp: ' + data.list[0].main.temp + ' F';
        centerContent.appendChild(createTemperatureDiv);
 
        let createWindDiv = document.createElement('div');
-       createWindDiv.textContent = 'Wind: ' + data.list[0].wind.speed;
+       createWindDiv.textContent = 'Wind: ' + data.list[0].wind.speed + ' MPH';
        centerContent.appendChild(createWindDiv);
 
        let createHumidDiv = document.createElement('div');
-       createHumidDiv.textContent = 'Humidity: ' + data.list[0].wind.gust;
+       createHumidDiv.textContent = 'Humidity: ' + data.list[0].wind.gust + ' %';
        centerContent.appendChild(createHumidDiv);
+
+
+       for (let i = 0; i < 5; i++) {
+           let weatherForecast = document.querySelector('.weather-forecast');
+           let createDiv = document.createElement('div');
+           createDiv.setAttribute('style', 'width:500px; height:500px; border: 2px solid red;');
+            createDiv.textContent = "Test";
+           centerContent.appendChild(createDiv);
+        }
+
+
     })
 }
 
 
 document.getElementById('submit-btn').onclick = callGeoApi;
 
+document.getElementById('clear-btn').onclick = function() {
+    centerContent.textContent = "";
+}
