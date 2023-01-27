@@ -1,5 +1,5 @@
 let centerContent = document.querySelector('.center-content');
-
+let searchHistory = document.querySelector('#search-city');
 
 
 // How do I hide the API key?
@@ -36,6 +36,7 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
     .then(function(data) {
 
         console.log(data);
+       
         
         let createh2El = document.querySelector('.weather-status');
         createh2El.textContent = data.list[0].dt_txt;
@@ -53,16 +54,22 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
        centerContent.appendChild(createHumidDiv);
 
 
+       
        for (let i = 0; i < 5; i++) {
            let weatherForecast = document.querySelector('.weather-forecast');
            let createDiv = document.createElement('div');
-           createDiv.setAttribute('style', 'width:500px; height:500px; border: 2px solid red;');
+           createDiv.setAttribute('class', 'weather-boxes');
             createDiv.textContent = "Test";
-           centerContent.appendChild(createDiv);
+           weatherForecast.appendChild(createDiv);
         }
 
 
     })
+}
+
+function appendHistory() {
+    
+    localStorage.setItem('recent-search', searchHistory.value);
 }
 
 
