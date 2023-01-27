@@ -1,5 +1,6 @@
 let centerContent = document.querySelector('.center-content');
-let searchHistory = document.querySelector('#search-city');
+let searchContainer = document.querySelector('.search-container');
+let searchBar = document.querySelector('#search-city')
 
 
 // How do I hide the API key?
@@ -8,26 +9,41 @@ let apiKey = 'fffae12063e8e68b76c3c77004656139';
 // Call the GeoAPI after user clicks on the search button 
 function callGeoApi() {
 
-    let userInput = document.getElementById('search-city').value; // target the search button by it's ID
-    let fetchUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + userInput + '&limit=1&appid=' + apiKey;
+    if (searchBar.value === '') {
 
-    fetch(fetchUrl)
+        let errorMsg = document.createElement('div');
+        errorMsg.setAttribute('style', 'color:red');
+        errorMsg.textContent = "Please enter a city";
+        searchContainer.appendChild(errorMsg);
+        setTimeout(() => {
+            errorMsg.textContent = '';
+        }, 1000)
 
-    .then(function(response) {
-        return response.json();
-    })
+        }
+    
 
-    .then(function(data) {
-        console.log(data);
-        let lat = data[0].lat;
-        let lon = data[0].lon;
-        call5DayData(lat, lon); // Call the 5 day weather forecast API with the variables that have the stored latitude and longitude as an argument. 
-    })
+    else {
+            let userInput = document.getElementById('search-city').value; // target the search button by it's ID
+            let fetchUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + userInput + '&limit=1&appid=' + apiKey;
+        
+            fetch(fetchUrl)
+        
+            .then(function(response) {
+                return response.json();
+            })
+        
+            .then(function(data) {
+                console.log(data);
+                let lat = data[0].lat;
+                let lon = data[0].lon;
+                call5DayData(lat, lon); // Call the 5 day weather forecast API with the variables that have the stored latitude and longitude as an argument. 
+            })
+    }
 }
 
 function call5DayData(lat, lon) { // Pass the values from the previous fetch request into the function parameters
 
-    let fetchUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+    let fetchUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=5&appid=${apiKey}&units=imperial`;
 
     fetch(fetchUrl)
     .then(function(response) {
@@ -52,6 +68,13 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
        let createHumidDiv = document.createElement('div');
        createHumidDiv.textContent = 'Humidity: ' + data.list[0].wind.gust + ' %';
        centerContent.appendChild(createHumidDiv);
+
+       let weatherIcon = data.list[0].weather[0].icon; // Stores the weather icon from data
+       let createWeatherIcon = document.createElement('img');
+       let weatherIconUrl = 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png';
+       createWeatherIcon.setAttribute('src', weatherIconUrl);
+       centerContent.appendChild(createWeatherIcon);
+
 
 
        
