@@ -1,3 +1,12 @@
+/* Test */ 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Test */
+
 #title-container {
     display: flex;
     justify-content: center;
@@ -24,7 +33,7 @@
 }
 
 .search-container {
-    width: 400px;
+    width: 300px;
 }
 
 .left-content {
@@ -41,7 +50,7 @@ button {
 .center-content {
     border: solid 2px black;
     border-radius: 10px;
-    height: 150px;
+    height: 250px;
     width: 100%;
     margin: 15px;
     margin-right: 100px;
@@ -53,7 +62,7 @@ button {
 }
 
 .weather-boxes {
-    width:200px; 
+    width:150px; 
     height:200px; 
     border: 2px solid black; 
     background-color: #023047;
@@ -63,24 +72,22 @@ button {
 }
 
 /* Start of Footer content */
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
+footer {
+    margin-top: auto;
     color: white;
     text-align: center;
+    padding-top: 30px;
     height: 80px;
     background: rgb(51,139,185);
     background: linear-gradient(90deg, rgba(51,139,185,1) 0%, rgba(27,16,133,1) 100%);
 }
 
 .footer-content {
-    font-size: 30px;
+    font-size: 20px;
 }
+
 
 /* Start of Media Queries */ 
 /* @media (min-width: 320px) and (max-width: 480px) {
     .main
-}     */
+}     

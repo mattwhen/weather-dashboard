@@ -1,7 +1,7 @@
 let centerContent = document.querySelector('.center-content');
 let searchContainer = document.querySelector('.search-container');
 let searchBar = document.querySelector('#search-city')
-
+let weatherArray = []; // Used to store search history of city 
 
 // How do I hide the API key?
 let apiKey = 'fffae12063e8e68b76c3c77004656139';
