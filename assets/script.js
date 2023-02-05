@@ -121,13 +121,16 @@ function callCityHistory(city) {
 
 function createHistBtn() {
     let existingCity = localStorage.getItem('city-search');
+    let existingCityArr = JSON.parse(existingCity);
+    
+
     let recentSearches = document.querySelector('.recent-searches');
-    for (let i = 0; i < existingCity.length; i++) {
-        let createBtn = document.createElement('button');
-        createBtn.setAttribute('class', 'btn btn-secondary btn-md history-btn');
-        createBtn.textContent = existingCity;
-        recentSearches.append(createBtn);
-    }
+    // for (let i = 0; i < existingCityArr.length; i++) {
+    //     let createBtn = document.createElement('button');
+    //     createBtn.setAttribute('class', 'btn btn-secondary btn-md history-btn');
+    //     createBtn.textContent = existingCity;
+    //     recentSearches.append(createBtn);
+    // }
     // if (existingCity != null) {
     //     let existingCityArry = JSON.parse(existingCity);
 
