@@ -3,7 +3,6 @@ let searchContainer = document.querySelector('.search-container');
 let searchBar = document.querySelector('#search-city');
 let weatherStatus = document.querySelector('.weather-status');
 let cityArray = JSON.parse(localStorage.getItem('search-history')); 
-let cityHistory = []; 
 
 // Call the GeoAPI after user clicks on the search button 
 function callGeoApi() {
@@ -19,6 +18,7 @@ function callGeoApi() {
         }
     // ELSE fetch data from the openweathermap URL. 
     else {
+
         let fetchUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchBar.value + '&limit=1&appid=' + apiKey;
             fetch(fetchUrl)
             .then(function(response) {
@@ -32,6 +32,7 @@ function callGeoApi() {
                 callCityHistory(searchBar.value);
                 document.querySelector('.form-control').value = '';
             })
+
     }
 }
 function call5DayData(lat, lon) { // Pass the values from the previous fetch request into the function parameters
@@ -42,7 +43,6 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
     })
     .then(function(data) {
         console.log(data);  
-
         let createh2El = document.querySelector('.weather-status');
         createh2El.textContent = data.list[0].dt_txt;
         // Creates div for displaying Temperature in Fahrenheit.
@@ -64,10 +64,12 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
 
     function createFiveDay() {
         // Creates 5 day weather forecast. 
+        let weatherForecast = document.querySelector('.weather-forecast');
+        weatherForecast.innerHTML = ''; 
        for (let i = 0; i < data.list.length; i++) {
             if (i == 0 || i % 8 == 0) {
 
-                let weatherForecast = document.querySelector('.weather-forecast');
+               
                 let createBox = document.createElement('div');
                 createBox.setAttribute('class', 'weather-boxes');
                 weatherForecast.append(createBox);
@@ -103,29 +105,38 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
 
 document.getElementById('submit-btn').onclick = callGeoApi;
 
-function callCityHistory(city) { 
+function callCityHistory(city) {  
     let existingCity = localStorage.getItem('city-search');
-    if (existingCity != null) {
+    if (existingCity != null) { // Does data already exist in LS? 
         let existingCityArr = JSON.parse(existingCity);
-        existingCityArr.push(city);
+        existingCityArr.unshift(city);
         localStorage.setItem('city-search', JSON.stringify(existingCityArr));
     }
-    else {
+    else { 
         let cityArray = [city];  // ['a', 1, 5]
         localStorage.setItem('city-search', JSON.stringify(cityArray));
     }
+    createHistBtn();
 }
 
 function createHistBtn() {
     let existingCity = localStorage.getItem('city-search');
-    if (existingCity != null) {
-        let existingCityArry = JSON.parse(existingCity);
-        console.log(existingCityArry);
-
+    let recentSearches = document.querySelector('.recent-searches');
+    for (let i = 0; i < existingCity.length; i++) {
+        let createBtn = document.createElement('button');
+        createBtn.setAttribute('class', 'btn btn-secondary btn-md history-btn');
+        createBtn.textContent = existingCity;
+        recentSearches.append(createBtn);
     }
+    // if (existingCity != null) {
+    //     let existingCityArry = JSON.parse(existingCity);
+
+    //     console.log(existingCityArry);
+
+    // }
 
 }
-createHistBtn();
+createHistBtn(); // Renders to the page automatically to show recent searches. 
 
 
 // Add event listener to each button that calls geoAPI with the city name. 
