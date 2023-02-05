@@ -5,7 +5,9 @@ body{
     flex-direction: column;
 }
 
-/* Test */
+h2 {
+    font-size: 20px;
+}
 
 #title-container {
     display: flex;

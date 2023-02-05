@@ -72,20 +72,26 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
                 createBox.setAttribute('class', 'weather-boxes');
                 weatherForecast.append(createBox);
                 // Insert data for 5 day forecast.
-                let currentTime = document.createElement('h2');
-                currentTime.textContent = `Time/Date: ${data.list[i].dt_txt.substring(0, 11)}`;
-                // Create Temp
-                let dateHeader = document.createElement('h2');
-                dateHeader.textContent = `Temp: ${data.list[i].main.temp} F`;
-                // Create Wind
-                let windHeader = document.createElement('p');
-                windHeader.textContent = `Wind: ${data.list[i].wind.gust} MPH`;
-                createBox.append(currentTime, dateHeader, windHeader);
-                // Create Humidity
-                let createHumidity = document.createElement('p');
-                createHumidDiv.textContent = `Humidity: ${data.list[i].wind.gust} %`;
+
+                // Create date header
+                let currentDate = document.createElement('h2');
+                currentDate.textContent = `${data.list[i].dt_txt.substring(0, 11)}`;
                 // Create weather icon
                 let createIcon = document.createElement('img');
+                let weatherIcon = data.list[i].weather[0].icon; // Stores the weather icon from data
+                let weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+                createIcon.setAttribute('src', weatherIconUrl);
+                // Create Temperature header
+                let tempHeader = document.createElement('h2');
+                tempHeader.textContent = `Temp: ${data.list[i].main.temp} F`;
+                // Create Wind header
+                let windHeader = document.createElement('h2');
+                windHeader.textContent = `Wind: ${data.list[i].wind.gust} MPH`;
+                // Create Humidity header
+                let createHumidity = document.createElement('h2');
+                createHumidity.textContent = `Humidity: ${data.list[i].wind.gust} %`;
+                // Append all the headers in each weather box. 
+                createBox.append(currentDate, createIcon, tempHeader, windHeader, createHumidity);
             }
 
     }
