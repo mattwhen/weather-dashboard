@@ -51,19 +51,19 @@ button {
     border: solid 2px black;
     border-radius: 10px;
     height: 250px;
-    width: 100%;
+    width: 75%;
     margin: 15px;
     margin-right: 100px;
 }
 
 .weather-container {
-    width: 60%;
+    width: 80%;
 
 }
 
 .weather-boxes {
     width:250px; 
-    height:200px; 
+    height:250px; 
     border: 2px solid black; 
     background-color: #023047;
     color: #ffff;

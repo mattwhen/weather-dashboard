@@ -44,7 +44,7 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
         console.log(data);  
 
         let createh2El = document.querySelector('.weather-status');
-        createh2El.textContent = data.list[0].dt_txt;
+        createh2El.textContent = `Date: ${data.list[0].dt_txt.substring(0, 11)}`; // Renders the current date and removes the excess string we don't need when rendering to the page. In this case, the time format (i.e. 12:30:00). 
         // Creates div for displaying Temperature in Fahrenheit.
         let createTemperatureDiv = document.createElement('div');
         createTemperatureDiv.textContent = 'Temp: ' + data.list[0].main.temp + ' F';
@@ -64,16 +64,21 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
 
     function createFiveDay() {
         // Creates 5 day weather forecast. 
-       for (let i = 0; i < data.list.length; i++) {
-            if (i == 0 || i % 8 == 0) {
-
+                let createHeader = document.createElement('h2');
+                createHeader.textContent = '5 Day Forecast: ';
                 let weatherForecast = document.querySelector('.weather-forecast');
+                weatherForecast.append(createHeader);
+       for (let i = 0; i < data.list.length; i++) {
+            if (i == 0 || i % 8 == 0) { 
+                /* Since we only want to render the data for 5 days onto the screen, 
+                we use the remainder (%) operator to take one operand (40) and divide by second operand (8). */
+                
                 let createBox = document.createElement('div');
                 createBox.setAttribute('class', 'weather-boxes');
                 weatherForecast.append(createBox);
                 // Insert data for 5 day forecast.
                 let currentTime = document.createElement('h2');
-                currentTime.textContent = `Time/Date: ${data.list[i].dt_txt.substring(0, 11)}`;
+                currentTime.textContent = `Date: ${data.list[i].dt_txt.substring(0, 11)}`; // Renders the current date and removes the excess string we don't need when rendering to the page. In this case, the time format (i.e. 12:30:00). 
                 // Create Temp
                 let dateHeader = document.createElement('h2');
                 dateHeader.textContent = `Temp: ${data.list[i].main.temp} F`;
