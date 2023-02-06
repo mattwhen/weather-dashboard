@@ -19,6 +19,7 @@ h2 {
 
 #title {
     font-size: 50px;
+    font-weight: bold;
     color: #FFFF;  
 }
 
@@ -34,6 +35,10 @@ h2 {
     width: 100%;
 }
 
+#search-city {
+    height: 50px;
+}
+
 .search-container {
     width: 100%;
 }
@@ -43,8 +48,18 @@ h2 {
     width: 500px;
 }
 
-button {
+#submit-btn {
     margin: 15px 0px 15px 0px;
+    width: 100%;
+}
+
+#clear-btn {
+    margin: 0px 0px 15px 0px;
+    width: 100%;
+}
+
+.btn-secondary {
+    margin: 0px 0px 15px 0px;
     width: 100%;
 }
 

@@ -44,16 +44,21 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
     })
     .then(function(data) {
         console.log(data);  
+        // Clear existing weather data (if any) before appending new data.
         weatherStatus.innerHTML = '';
+        // Creates and displays name of city as a header element
+        let currentCity = document.createElement('h2');
+        currentCity.textContent = data.city.name;
+        // Creates and displays current date
         let currentDate = document.createElement('h2');
-        currentDate.textContent = data.list[0].dt_txt;
-        // Creates div for displaying Temperature in Fahrenheit.
+        currentDate.textContent = data.list[0].dt_txt.substring(0, 11);
+        // Creates header for displaying Temperature in Fahrenheit.
         let tempHeader = document.createElement('h2');
         tempHeader.textContent = 'Temp: ' + data.list[0].main.temp + ' F';
-        // Creates div for wind measurement.
+        // Creates header for wind measurement.
         let windHeader = document.createElement('h2');
         windHeader.textContent = 'Wind: ' + data.list[0].wind.speed + ' MPH';
-        // Creates div for humidity. 
+        // Creates header for humidity. 
         let createHumidity = document.createElement('h2');
         createHumidity.textContent = 'Humidity: ' + data.list[0].wind.gust + ' %';
         // Creates img element and displays weather icon as the content.
@@ -62,7 +67,7 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
         let weatherIconUrl = 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png';
         createWeatherIcon.setAttribute('src', weatherIconUrl);
 
-        weatherStatus.append(currentDate, tempHeader, windHeader, createHumidity, createWeatherIcon); // Appends all data to center container
+        weatherStatus.append(tempHeader, windHeader, createHumidity, createWeatherIcon); // Appends all data to center container
 
     function createFiveDay() {
         // Creates 5 day weather forecast. 
@@ -76,7 +81,6 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
                 createBox.setAttribute('class', 'weather-boxes');
                 weatherForecast.append(createBox);
                 // Insert data for 5 day forecast.
-
                 // Create date header
                 let currentDate = document.createElement('h2');
                 currentDate.textContent = `${data.list[i].dt_txt.substring(0, 11)}`;
@@ -129,24 +133,14 @@ function createHistBtn() {
     recentSearch.innerHTML = ' '; 
     for (let i = existingCityArr.length - 1; i >= 0; i--) {
         let createBtn = document.createElement('button');
-        createBtn.setAttribute('type', 'button');
+        createBtn.setAttribute('class', 'btn btn-secondary btn-md')
+        createBtn.setAttribute('style', 'color:black; background-color: #adb5bd');
         createBtn.textContent = existingCityArr[i];
         recentSearch.append(createBtn);
     }
 
     let recentSearches = document.querySelector('.recent-searches');
-    // for (let i = 0; i < existingCityArr.length; i++) {
-    //     let createBtn = document.createElement('button');
-    //     createBtn.setAttribute('class', 'btn btn-secondary btn-md history-btn');
-    //     createBtn.textContent = existingCity;
-    //     recentSearches.append(createBtn);
-    // }
-    // if (existingCity != null) {
-    //     let existingCityArry = JSON.parse(existingCity);
 
-    //     console.log(existingCityArry);
-
-    // }
 
 }
 createHistBtn(); // Renders to the page automatically to show recent searches. 
