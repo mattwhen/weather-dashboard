@@ -3,6 +3,7 @@ let searchContainer = document.querySelector('.search-container');
 let searchBar = document.querySelector('#search-city');
 let weatherStatus = document.querySelector('.weather-status');
 let cityArray = JSON.parse(localStorage.getItem('search-history')); 
+let recentSearch = document.querySelector('.recent-searches');
 
 // Call the GeoAPI after user clicks on the search button 
 function callGeoApi() {
@@ -43,24 +44,25 @@ function call5DayData(lat, lon) { // Pass the values from the previous fetch req
     })
     .then(function(data) {
         console.log(data);  
-        let createh2El = document.querySelector('.weather-status');
-        createh2El.textContent = data.list[0].dt_txt;
+        weatherStatus.innerHTML = '';
+        let currentDate = document.createElement('h2');
+        currentDate.textContent = data.list[0].dt_txt;
         // Creates div for displaying Temperature in Fahrenheit.
-        let createTemperatureDiv = document.createElement('div');
-        createTemperatureDiv.textContent = 'Temp: ' + data.list[0].main.temp + ' F';
+        let tempHeader = document.createElement('h2');
+        tempHeader.textContent = 'Temp: ' + data.list[0].main.temp + ' F';
         // Creates div for wind measurement.
-        let createWindDiv = document.createElement('div');
-        createWindDiv.textContent = 'Wind: ' + data.list[0].wind.speed + ' MPH';
+        let windHeader = document.createElement('h2');
+        windHeader.textContent = 'Wind: ' + data.list[0].wind.speed + ' MPH';
         // Creates div for humidity. 
-        let createHumidDiv = document.createElement('div');
-        createHumidDiv.textContent = 'Humidity: ' + data.list[0].wind.gust + ' %';
+        let createHumidity = document.createElement('h2');
+        createHumidity.textContent = 'Humidity: ' + data.list[0].wind.gust + ' %';
         // Creates img element and displays weather icon as the content.
         let weatherIcon = data.list[0].weather[0].icon; // Stores the weather icon from data
         let createWeatherIcon = document.createElement('img');
         let weatherIconUrl = 'https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png';
         createWeatherIcon.setAttribute('src', weatherIconUrl);
 
-        centerContent.append(createh2El, createTemperatureDiv, createWindDiv, createHumidDiv, createWeatherIcon); // Appends all data to center container
+        weatherStatus.append(currentDate, tempHeader, windHeader, createHumidity, createWeatherIcon); // Appends all data to center container
 
     function createFiveDay() {
         // Creates 5 day weather forecast. 
@@ -107,9 +109,10 @@ document.getElementById('submit-btn').onclick = callGeoApi;
 
 function callCityHistory(city) {  
     let existingCity = localStorage.getItem('city-search');
+
     if (existingCity != null) { // Does data already exist in LS? 
         let existingCityArr = JSON.parse(existingCity);
-        existingCityArr.unshift(city);
+        existingCityArr.push(city);
         localStorage.setItem('city-search', JSON.stringify(existingCityArr));
     }
     else { 
@@ -122,7 +125,14 @@ function callCityHistory(city) {
 function createHistBtn() {
     let existingCity = localStorage.getItem('city-search');
     let existingCityArr = JSON.parse(existingCity);
-    
+    console.log(existingCityArr);
+    recentSearch.innerHTML = ' '; 
+    for (let i = existingCityArr.length - 1; i >= 0; i--) {
+        let createBtn = document.createElement('button');
+        createBtn.setAttribute('type', 'button');
+        createBtn.textContent = existingCityArr[i];
+        recentSearch.append(createBtn);
+    }
 
     let recentSearches = document.querySelector('.recent-searches');
     // for (let i = 0; i < existingCityArr.length; i++) {
